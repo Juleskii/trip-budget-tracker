@@ -33,7 +33,7 @@ export function DeleteTripButton({ tripId, tripName }: Props) {
     if (showConfirm) {
         return (
             <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">Delete "{tripName}"?</span>
+                <span className="text-sm text-gray-600">Delete '{tripName}'?</span>
                 <button
                     onClick={handleDelete}
                     disabled={loading}

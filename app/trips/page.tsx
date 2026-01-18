@@ -42,7 +42,7 @@ export default async function TripsPage() {
 
             {trips && trips.length === 0 && (
                 <div className="text-center py-12 bg-white rounded-lg shadow">
-                    <p className="text-gray-500 mb-4">You haven't created any trips yet.</p>
+                    <p className="text-gray-600 mb-4">You haven't created any trips yet.</p>
                     <Link
                         href="/trips/new"
                         className="text-blue-600 hover:text-blue-500 font-medium"
