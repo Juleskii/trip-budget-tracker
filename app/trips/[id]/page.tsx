@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { formatDate, formatCurrency } from '@/lib/utils/format'
 import { DeleteTripButton } from './components/delete-trip-button'
-import type { Trip } from '@/lib/types/database'
+import { ExpenseList } from './components/expense-list'
+import type { Trip, Expense } from '@/lib/types/database'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -13,17 +14,33 @@ export default async function TripDetailPage({ params }: Props) {
   const { id } = await params
   const supabase = await createClient()
 
-  const { data: trip, error } = await supabase
+  const { data: trip, error: tripError } = await supabase
     .from('trips')
     .select('*')
     .eq('id', id)
     .single()
 
-  if (error || !trip) {
+  if (tripError || !trip) {
     notFound()
   }
 
+  const { data: expenses } = await supabase
+    .from('expenses')
+    .select('*')
+    .eq('trip_id', id)
+    .order('date', { ascending: false })
+
   const typedTrip = trip as Trip
+  const typedExpenses = (expenses || []) as Expense[]
+
+  const totalSpent = typedExpenses.reduce(
+    (sum, expense) => sum + Number(expense.amount_base),
+    0
+  )
+  const remaining = Number(typedTrip.total_budget) - totalSpent
+  const percentSpent = typedTrip.total_budget > 0
+    ? Math.round((totalSpent / Number(typedTrip.total_budget)) * 100)
+    : 0
 
   return (
     <div className="space-y-6">
@@ -61,15 +78,15 @@ export default async function TripDetailPage({ params }: Props) {
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-sm font-medium text-gray-600">Spent</h3>
           <p className="text-2xl font-bold text-gray-900 mt-1">
-            {formatCurrency(0, typedTrip.base_currency)}
+            {formatCurrency(totalSpent, typedTrip.base_currency)}
           </p>
-          <p className="text-sm text-gray-600 mt-1">0% of budget</p>
+          <p className="text-sm text-gray-600 mt-1">{percentSpent}% of budget</p>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-sm font-medium text-gray-600">Remaining</h3>
-          <p className="text-2xl font-bold text-green-600 mt-1">
-            {formatCurrency(Number(typedTrip.total_budget), typedTrip.base_currency)}
+          <p className={`text-2xl font-bold mt-1 ${remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {formatCurrency(remaining, typedTrip.base_currency)}
           </p>
         </div>
       </div>
@@ -98,16 +115,14 @@ export default async function TripDetailPage({ params }: Props) {
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900">Expenses</h2>
-          <button
-            disabled
-            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg opacity-50 cursor-not-allowed"
+          <Link
+            href={`/trips/${id}/expenses/new`}
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
           >
             + Add Expense
-          </button>
+          </Link>
         </div>
-        <p className="text-gray-600 text-center py-8">
-          No expenses yet. Expense tracking coming soon!
-        </p>
+        <ExpenseList expenses={typedExpenses} baseCurrency={typedTrip.base_currency} />
       </div>
     </div>
   )
