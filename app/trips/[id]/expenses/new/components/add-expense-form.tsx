@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { EXPENSE_CATEGORIES } from '@/lib/types/database'
 import type { Trip } from '@/lib/types/database'
 
-const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'PHP']
+const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'PHP', 'THB', 'SGD', 'MYR', 'IDR', 'VND', 'KRW', 'CNY', 'HKD', 'TWD', 'INR', 'AED', 'CHF', 'NZD', 'MXN', 'BRL']
 
 type Props = {
   trip: Trip
@@ -16,6 +16,8 @@ type Props = {
 export function AddExpenseForm({ trip }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [converting, setConverting] = useState(false)
+  const [conversionError, setConversionError] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const today = new Date().toISOString().split('T')[0]
@@ -28,6 +30,59 @@ export function AddExpenseForm({ trip }: Props) {
     note: '',
     exchange_rate: '1',
   })
+
+  // Auto-convert currency when amount or currency changes
+  const fetchExchangeRate = useCallback(async (amount: string, from: string, to: string) => {
+    if (!amount || parseFloat(amount) <= 0 || from === to) {
+      setFormData(prev => ({ ...prev, exchange_rate: '1' }))
+      setConversionError(false)
+      return
+    }
+
+    setConverting(true)
+    setConversionError(false)
+
+    try {
+      const response = await fetch('/api/currency', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          from,
+          to,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Conversion failed')
+      }
+
+      const data = await response.json()
+      setFormData(prev => ({
+        ...prev,
+        exchange_rate: String(data.exchangeRate),
+      }))
+    } catch {
+      setConversionError(true)
+      // Keep previous exchange rate, user can enter manually
+    } finally {
+      setConverting(false)
+    }
+  }, [])
+
+  // Debounced effect for auto-conversion
+  useEffect(() => {
+    if (formData.currency === trip.base_currency) {
+      setFormData(prev => ({ ...prev, exchange_rate: '1' }))
+      return
+    }
+
+    const timer = setTimeout(() => {
+      fetchExchangeRate(formData.amount, formData.currency, trip.base_currency)
+    }, 500) // 500ms debounce
+
+    return () => clearTimeout(timer)
+  }, [formData.amount, formData.currency, trip.base_currency, fetchExchangeRate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,6 +127,9 @@ export function AddExpenseForm({ trip }: Props) {
   }
 
   const showExchangeRate = formData.currency !== trip.base_currency
+  const convertedAmount = formData.amount && formData.exchange_rate
+    ? (parseFloat(formData.amount) * parseFloat(formData.exchange_rate)).toFixed(2)
+    : null
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -109,7 +167,6 @@ export function AddExpenseForm({ trip }: Props) {
             onChange={(e) => setFormData({
               ...formData,
               currency: e.target.value,
-              exchange_rate: e.target.value === trip.base_currency ? '1' : formData.exchange_rate
             })}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
@@ -124,22 +181,37 @@ export function AddExpenseForm({ trip }: Props) {
 
       {showExchangeRate && (
         <div>
-          <label htmlFor="exchange_rate" className="block text-sm font-medium text-gray-700">
-            Exchange Rate <span className="text-gray-500">(1 {formData.currency} = ? {trip.base_currency})</span>
-          </label>
+          <div className="flex items-center justify-between">
+            <label htmlFor="exchange_rate" className="block text-sm font-medium text-gray-700">
+              Exchange Rate
+              <span className="text-gray-500 font-normal ml-1">
+                (1 {formData.currency} = ? {trip.base_currency})
+              </span>
+            </label>
+            {converting && (
+              <span className="text-xs text-blue-600">Fetching rate...</span>
+            )}
+          </div>
           <input
             id="exchange_rate"
             type="number"
             required
             min="0"
-            step="0.000001"
+            step="any"
             value={formData.exchange_rate}
             onChange={(e) => setFormData({ ...formData, exchange_rate: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={`mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              conversionError ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300'
+            }`}
           />
-          {formData.amount && formData.exchange_rate && (
+          {conversionError && (
+            <p className="mt-1 text-xs text-yellow-700">
+              Auto-conversion failed. Please enter rate manually.
+            </p>
+          )}
+          {convertedAmount && !converting && (
             <p className="mt-1 text-sm text-gray-600">
-              = {(parseFloat(formData.amount) * parseFloat(formData.exchange_rate)).toFixed(2)} {trip.base_currency}
+              = {convertedAmount} {trip.base_currency}
             </p>
           )}
         </div>
@@ -200,7 +272,7 @@ export function AddExpenseForm({ trip }: Props) {
         </Link>
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || converting}
           className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Adding...' : 'Add Expense'}
