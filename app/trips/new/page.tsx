@@ -109,7 +109,7 @@ export default function NewTripPage() {
                             required
                             value={formData.name}
                             onChange={(e) => updateField('name', e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-500"
+                            className="mt-1 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-500"
                             placeholder="e.g., Japan 2024"
                         />
                     </div>
@@ -157,7 +157,7 @@ export default function NewTripPage() {
                                 onChange={(e) =>
                                     updateField('total_budget', parseFloat(e.target.value) || 0)
                                 }
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-500"
+                                className="mt-1 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-500"
                                 placeholder="0.00"
                             />
                         </div>
