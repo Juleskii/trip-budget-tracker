@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { EXPENSE_CATEGORIES } from '@/lib/types/database'
-import type { Trip } from '@/lib/types/database'
+import type { Trip, ExpenseCategory } from '@/lib/types/database'
 
 const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'PHP', 'THB', 'SGD', 'MYR', 'IDR', 'VND', 'KRW', 'CNY', 'HKD', 'TWD', 'INR', 'AED', 'CHF', 'NZD', 'MXN', 'BRL']
 
@@ -22,7 +22,14 @@ export function AddExpenseForm({ trip }: Props) {
 
   const today = new Date().toISOString().split('T')[0]
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    amount: string;
+    currency: string;
+    category: ExpenseCategory;
+    date: string;
+    note: string;
+    exchange_rate: string;
+  }>({
     amount: '',
     currency: trip.base_currency,
     category: EXPENSE_CATEGORIES[0],
@@ -224,7 +231,7 @@ export function AddExpenseForm({ trip }: Props) {
         <select
           id="category"
           value={formData.category}
-          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, category: e.target.value as ExpenseCategory })}
           className="mt-1 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           {EXPENSE_CATEGORIES.map((category) => (

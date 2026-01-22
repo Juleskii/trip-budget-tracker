@@ -2,7 +2,7 @@
 
 > **Version**: 1.0.0
 > **Last Updated**: January 2026
-> **Author**: Ken
+> **Author**: Kenneth Jules
 
 ---
 
@@ -43,12 +43,12 @@ The application follows a **serverless architecture** pattern using:
 
 ### 1.3 Key Design Principles
 
-| Principle | Implementation |
-|-----------|---------------|
-| Mobile-First | Tailwind CSS responsive design, touch-optimized UI |
-| Offline-Ready | Sync queue architecture (planned) |
-| Multi-Tenant | Row-level security, user-scoped data |
-| Real-Time | Supabase real-time subscriptions for shared trips |
+| Principle     | Implementation                                     |
+| ------------- | -------------------------------------------------- |
+| Mobile-First  | Tailwind CSS responsive design, touch-optimized UI |
+| Offline-Ready | Sync queue architecture (planned)                  |
+| Multi-Tenant  | Row-level security, user-scoped data               |
+| Real-Time     | Supabase real-time subscriptions for shared trips  |
 
 ---
 
@@ -56,30 +56,30 @@ The application follows a **serverless architecture** pattern using:
 
 ### 2.1 Frontend
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Next.js | 16.1.2 | React framework with App Router |
-| React | 19.2.3 | UI component library |
-| TypeScript | 5.x | Type-safe development |
-| Tailwind CSS | 4.x | Utility-first styling |
-| date-fns | 4.1.0 | Date formatting utilities |
+| Technology   | Version | Purpose                         |
+| ------------ | ------- | ------------------------------- |
+| Next.js      | 16.1.2  | React framework with App Router |
+| React        | 19.2.3  | UI component library            |
+| TypeScript   | 5.x     | Type-safe development           |
+| Tailwind CSS | 4.x     | Utility-first styling           |
+| date-fns     | 4.1.0   | Date formatting utilities       |
 
 ### 2.2 Backend Services
 
-| Service | Purpose |
-|---------|---------|
-| Supabase PostgreSQL | Primary database |
-| Supabase Auth | User authentication (email/password) |
-| Supabase Realtime | Live data subscriptions |
-| Frankfurter API | ECB currency exchange rates |
+| Service             | Purpose                              |
+| ------------------- | ------------------------------------ |
+| Supabase PostgreSQL | Primary database                     |
+| Supabase Auth       | User authentication (email/password) |
+| Supabase Realtime   | Live data subscriptions              |
+| Frankfurter API     | ECB currency exchange rates          |
 
 ### 2.3 Development & Build
 
-| Tool | Purpose |
-|------|---------|
-| ESLint 9 | Code linting |
+| Tool                 | Purpose                     |
+| -------------------- | --------------------------- |
+| ESLint 9             | Code linting                |
 | Babel React Compiler | Optimized React compilation |
-| Vercel | Deployment platform |
+| Vercel               | Deployment platform         |
 
 ### 2.4 NPM Dependencies
 
@@ -253,59 +253,61 @@ User Action → Client Component → Server Action/API Route → Supabase → Re
 
 #### 4.2.1 `trips` Table
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY, DEFAULT uuid_generate_v4() | Unique trip identifier |
-| `name` | VARCHAR(255) | NOT NULL | Trip display name |
-| `base_currency` | VARCHAR(3) | NOT NULL | ISO 4217 currency code |
-| `total_budget` | NUMERIC(12,2) | NOT NULL | Total allocated budget |
-| `start_date` | DATE | NOT NULL | Trip start date |
-| `end_date` | DATE | NULL | Optional end date |
-| `created_by` | UUID | FOREIGN KEY → auth.users(id) | Trip owner |
-| `created_at` | TIMESTAMPTZ | DEFAULT now() | Creation timestamp |
-| `updated_at` | TIMESTAMPTZ | DEFAULT now() | Last update timestamp |
+| Column          | Type          | Constraints                             | Description            |
+| --------------- | ------------- | --------------------------------------- | ---------------------- |
+| `id`            | UUID          | PRIMARY KEY, DEFAULT uuid_generate_v4() | Unique trip identifier |
+| `name`          | VARCHAR(255)  | NOT NULL                                | Trip display name      |
+| `base_currency` | VARCHAR(3)    | NOT NULL                                | ISO 4217 currency code |
+| `total_budget`  | NUMERIC(12,2) | NOT NULL                                | Total allocated budget |
+| `start_date`    | DATE          | NOT NULL                                | Trip start date        |
+| `end_date`      | DATE          | NULL                                    | Optional end date      |
+| `created_by`    | UUID          | FOREIGN KEY → auth.users(id)            | Trip owner             |
+| `created_at`    | TIMESTAMPTZ   | DEFAULT now()                           | Creation timestamp     |
+| `updated_at`    | TIMESTAMPTZ   | DEFAULT now()                           | Last update timestamp  |
 
 #### 4.2.2 `expenses` Table
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY, DEFAULT uuid_generate_v4() | Unique expense identifier |
-| `trip_id` | UUID | FOREIGN KEY → trips(id) ON DELETE CASCADE | Parent trip |
-| `amount` | NUMERIC(12,2) | NOT NULL | Original amount |
-| `currency` | VARCHAR(3) | NOT NULL | Transaction currency |
-| `amount_base` | NUMERIC(12,2) | NOT NULL | Converted to base currency |
-| `exchange_rate` | NUMERIC(10,6) | NOT NULL | Conversion rate used |
-| `category` | VARCHAR(50) | NOT NULL | Expense category |
-| `date` | DATE | NOT NULL | Transaction date |
-| `note` | TEXT | NULL | Optional description |
-| `created_by` | UUID | FOREIGN KEY → auth.users(id) | Creator |
-| `created_at` | TIMESTAMPTZ | DEFAULT now() | Creation timestamp |
-| `updated_at` | TIMESTAMPTZ | DEFAULT now() | Last update timestamp |
+| Column          | Type          | Constraints                               | Description                |
+| --------------- | ------------- | ----------------------------------------- | -------------------------- |
+| `id`            | UUID          | PRIMARY KEY, DEFAULT uuid_generate_v4()   | Unique expense identifier  |
+| `trip_id`       | UUID          | FOREIGN KEY → trips(id) ON DELETE CASCADE | Parent trip                |
+| `amount`        | NUMERIC(12,2) | NOT NULL                                  | Original amount            |
+| `currency`      | VARCHAR(3)    | NOT NULL                                  | Transaction currency       |
+| `amount_base`   | NUMERIC(12,2) | NOT NULL                                  | Converted to base currency |
+| `exchange_rate` | NUMERIC(10,6) | NOT NULL                                  | Conversion rate used       |
+| `category`      | VARCHAR(50)   | NOT NULL                                  | Expense category           |
+| `date`          | DATE          | NOT NULL                                  | Transaction date           |
+| `note`          | TEXT          | NULL                                      | Optional description       |
+| `created_by`    | UUID          | FOREIGN KEY → auth.users(id)              | Creator                    |
+| `created_at`    | TIMESTAMPTZ   | DEFAULT now()                             | Creation timestamp         |
+| `updated_at`    | TIMESTAMPTZ   | DEFAULT now()                             | Last update timestamp      |
 
 #### 4.2.3 `trip_users` Table (Multi-User Access)
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `trip_id` | UUID | PRIMARY KEY, FOREIGN KEY → trips(id) | Trip reference |
-| `user_id` | UUID | PRIMARY KEY, FOREIGN KEY → auth.users(id) | User reference |
-| `role` | VARCHAR(20) | NOT NULL, DEFAULT 'member' | User role (owner/member) |
+| Column    | Type        | Constraints                               | Description              |
+| --------- | ----------- | ----------------------------------------- | ------------------------ |
+| `trip_id` | UUID        | PRIMARY KEY, FOREIGN KEY → trips(id)      | Trip reference           |
+| `user_id` | UUID        | PRIMARY KEY, FOREIGN KEY → auth.users(id) | User reference           |
+| `role`    | VARCHAR(20) | NOT NULL, DEFAULT 'member'                | User role (owner/member) |
 
 ### 4.3 Supported Values
 
 #### Currencies (ISO 4217)
+
 ```
 USD, EUR, GBP, JPY, CAD, AUD, PHP
 ```
 
 #### Expense Categories
+
 ```typescript
 const EXPENSE_CATEGORIES = [
-  'Food & Drinks',
-  'Transport',
-  'Accommodation',
-  'Activities',
-  'Shopping',
-  'Other'
+  "Food & Drinks",
+  "Transport",
+  "Accommodation",
+  "Activities",
+  "Shopping",
+  "Other",
 ] as const;
 ```
 
@@ -329,23 +331,25 @@ CREATE INDEX idx_trip_users_user_id ON trip_users(user_id);
 
 OAuth callback handler for Supabase authentication.
 
-| Property | Value |
-|----------|-------|
-| **Method** | GET |
+| Property           | Value                    |
+| ------------------ | ------------------------ |
+| **Method**         | GET                      |
 | **Authentication** | None (callback endpoint) |
-| **Rate Limit** | N/A |
+| **Rate Limit**     | N/A                      |
 
 **Query Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `code` | string | Yes | OAuth authorization code |
+| Parameter | Type   | Required | Description              |
+| --------- | ------ | -------- | ------------------------ |
+| `code`    | string | Yes      | OAuth authorization code |
 
 **Response:**
+
 - **Success**: Redirect to `/dashboard`
 - **Failure**: Redirect to `/login`
 
 **Flow:**
+
 ```
 1. User clicks email verification link
 2. Supabase redirects to /auth/callback?code=xxx
@@ -361,20 +365,20 @@ OAuth callback handler for Supabase authentication.
 
 Converts currency amounts using real-time exchange rates.
 
-| Property | Value |
-|----------|-------|
-| **Method** | POST |
-| **Authentication** | None (public endpoint) |
-| **Rate Limit** | Recommended: 100 req/min |
-| **Cache TTL** | 1 hour (in-memory) |
+| Property           | Value                    |
+| ------------------ | ------------------------ |
+| **Method**         | POST                     |
+| **Authentication** | None (public endpoint)   |
+| **Rate Limit**     | Recommended: 100 req/min |
+| **Cache TTL**      | 1 hour (in-memory)       |
 
 **Request Body:**
 
 ```typescript
 interface CurrencyRequest {
-  amount: number;   // Amount to convert
-  from: string;     // Source currency (ISO 4217)
-  to: string;       // Target currency (ISO 4217)
+  amount: number; // Amount to convert
+  from: string; // Source currency (ISO 4217)
+  to: string; // Target currency (ISO 4217)
 }
 ```
 
@@ -383,14 +387,14 @@ interface CurrencyRequest {
 ```typescript
 // Success (200)
 interface CurrencyResponse {
-  convertedAmount: number;   // Converted amount
-  exchangeRate: number;      // Rate used
-  cached: boolean;           // Whether rate was cached
+  convertedAmount: number; // Converted amount
+  exchangeRate: number; // Rate used
+  cached: boolean; // Whether rate was cached
 }
 
 // Error (400/500)
 interface ErrorResponse {
-  error: string;             // Error message
+  error: string; // Error message
 }
 ```
 
@@ -412,11 +416,11 @@ curl -X POST /api/currency \
 
 **Error Codes:**
 
-| Status | Condition |
-|--------|-----------|
-| 200 | Success |
-| 400 | Invalid currency pair or missing parameters |
-| 500 | Frankfurter API failure |
+| Status | Condition                                   |
+| ------ | ------------------------------------------- |
+| 200    | Success                                     |
+| 400    | Invalid currency pair or missing parameters |
+| 500    | Frankfurter API failure                     |
 
 ---
 
@@ -429,28 +433,25 @@ All data operations use the Supabase JavaScript client directly. Below are the k
 ```typescript
 // Create trip
 const { data, error } = await supabase
-  .from('trips')
+  .from("trips")
   .insert({ name, base_currency, total_budget, start_date, end_date })
   .select()
   .single();
 
 // Read trips (user-scoped)
 const { data, error } = await supabase
-  .from('trips')
-  .select('*')
-  .order('created_at', { ascending: false });
+  .from("trips")
+  .select("*")
+  .order("created_at", { ascending: false });
 
 // Update trip
 const { error } = await supabase
-  .from('trips')
+  .from("trips")
   .update({ name, base_currency, total_budget, start_date, end_date })
-  .eq('id', tripId);
+  .eq("id", tripId);
 
 // Delete trip
-const { error } = await supabase
-  .from('trips')
-  .delete()
-  .eq('id', tripId);
+const { error } = await supabase.from("trips").delete().eq("id", tripId);
 ```
 
 #### Expenses CRUD
@@ -458,32 +459,43 @@ const { error } = await supabase
 ```typescript
 // Create expense
 const { data, error } = await supabase
-  .from('expenses')
+  .from("expenses")
   .insert({
-    trip_id, amount, currency, amount_base,
-    exchange_rate, category, date, note
+    trip_id,
+    amount,
+    currency,
+    amount_base,
+    exchange_rate,
+    category,
+    date,
+    note,
   })
   .select()
   .single();
 
 // Read expenses for trip
 const { data, error } = await supabase
-  .from('expenses')
-  .select('*')
-  .eq('trip_id', tripId)
-  .order('date', { ascending: false });
+  .from("expenses")
+  .select("*")
+  .eq("trip_id", tripId)
+  .order("date", { ascending: false });
 
 // Update expense
 const { error } = await supabase
-  .from('expenses')
-  .update({ amount, currency, category, date, note, amount_base, exchange_rate })
-  .eq('id', expenseId);
+  .from("expenses")
+  .update({
+    amount,
+    currency,
+    category,
+    date,
+    note,
+    amount_base,
+    exchange_rate,
+  })
+  .eq("id", expenseId);
 
 // Delete expense
-const { error } = await supabase
-  .from('expenses')
-  .delete()
-  .eq('id', expenseId);
+const { error } = await supabase.from("expenses").delete().eq("id", expenseId);
 ```
 
 ---
@@ -505,20 +517,20 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 #### Auth Configuration (Supabase Dashboard)
 
-| Setting | Value |
-|---------|-------|
-| Email Confirmations | Enabled |
-| Redirect URLs | `http://localhost:3000/auth/callback`, `https://your-domain.com/auth/callback` |
-| Password Min Length | 6 characters |
+| Setting             | Value                                                                          |
+| ------------------- | ------------------------------------------------------------------------------ |
+| Email Confirmations | Enabled                                                                        |
+| Redirect URLs       | `http://localhost:3000/auth/callback`, `https://your-domain.com/auth/callback` |
+| Password Min Length | 6 characters                                                                   |
 
 ### 6.2 Frankfurter API
 
-| Property | Value |
-|----------|-------|
-| Base URL | `https://api.frankfurter.app` |
-| Authentication | None (public API) |
-| Rate Limit | Fair use (no strict limit) |
-| Data Source | European Central Bank |
+| Property       | Value                         |
+| -------------- | ----------------------------- |
+| Base URL       | `https://api.frankfurter.app` |
+| Authentication | None (public API)             |
+| Rate Limit     | Fair use (no strict limit)    |
+| Data Source    | European Central Bank         |
 
 #### Endpoints Used
 
@@ -532,12 +544,12 @@ The API supports 32+ currencies including: AUD, BGN, BRL, CAD, CHF, CNY, CZK, DK
 
 ### 6.3 Vercel Deployment
 
-| Configuration | Value |
-|--------------|-------|
-| Framework | Next.js |
-| Build Command | `npm run build` |
-| Output Directory | `.next` |
-| Node Version | 18.x+ |
+| Configuration    | Value           |
+| ---------------- | --------------- |
+| Framework        | Next.js         |
+| Build Command    | `npm run build` |
+| Output Directory | `.next`         |
+| Node Version     | 18.x+           |
 
 ---
 
@@ -545,12 +557,12 @@ The API supports 32+ currencies including: AUD, BGN, BRL, CAD, CHF, CNY, CZK, DK
 
 ### 7.1 Authentication Security
 
-| Layer | Implementation |
-|-------|---------------|
-| Password Storage | Supabase (bcrypt hashing) |
-| Session Management | HTTP-only cookies, JWT |
-| Token Refresh | Automatic via middleware |
-| CSRF Protection | SameSite cookies |
+| Layer              | Implementation            |
+| ------------------ | ------------------------- |
+| Password Storage   | Supabase (bcrypt hashing) |
+| Session Management | HTTP-only cookies, JWT    |
+| Token Refresh      | Automatic via middleware  |
+| CSRF Protection    | SameSite cookies          |
 
 ### 7.2 Authorization
 
@@ -558,10 +570,10 @@ The API supports 32+ currencies including: AUD, BGN, BRL, CAD, CHF, CNY, CZK, DK
 
 ```typescript
 // Protected routes
-const protectedPaths = ['/dashboard', '/trips'];
+const protectedPaths = ["/dashboard", "/trips"];
 
 // Auth routes (redirect if logged in)
-const authPaths = ['/login', '/signup'];
+const authPaths = ["/login", "/signup"];
 ```
 
 #### Row-Level Security (RLS)
@@ -599,20 +611,20 @@ CREATE POLICY "Users can view trip expenses" ON expenses
 
 ### 7.3 Data Protection
 
-| Concern | Mitigation |
-|---------|-----------|
-| XSS | React automatic escaping, no dangerouslySetInnerHTML |
-| SQL Injection | Supabase parameterized queries |
-| HTTPS | Enforced by Vercel |
-| Environment Secrets | `.env.local` (not committed) |
+| Concern             | Mitigation                                           |
+| ------------------- | ---------------------------------------------------- |
+| XSS                 | React automatic escaping, no dangerouslySetInnerHTML |
+| SQL Injection       | Supabase parameterized queries                       |
+| HTTPS               | Enforced by Vercel                                   |
+| Environment Secrets | `.env.local` (not committed)                         |
 
 ### 7.4 Compliance Considerations
 
-| Regulation | Status |
-|------------|--------|
-| GDPR | User data scoped, deletion supported |
-| PCI DSS | N/A (no payment processing) |
-| SOC 2 | Inherited from Supabase/Vercel |
+| Regulation | Status                               |
+| ---------- | ------------------------------------ |
+| GDPR       | User data scoped, deletion supported |
+| PCI DSS    | N/A (no payment processing)          |
+| SOC 2      | Inherited from Supabase/Vercel       |
 
 ---
 
@@ -620,24 +632,24 @@ CREATE POLICY "Users can view trip expenses" ON expenses
 
 ### 8.1 Testing Strategy
 
-| Level | Tools | Coverage Target |
-|-------|-------|-----------------|
-| Unit | Jest, React Testing Library | 80% |
-| Integration | Playwright | Critical paths |
-| E2E | Playwright | User journeys |
-| API | Jest, Supertest | All endpoints |
+| Level       | Tools                       | Coverage Target |
+| ----------- | --------------------------- | --------------- |
+| Unit        | Jest, React Testing Library | 80%             |
+| Integration | Playwright                  | Critical paths  |
+| E2E         | Playwright                  | User journeys   |
+| API         | Jest, Supertest             | All endpoints   |
 
 ### 8.2 Unit Tests
 
 ```typescript
 // Example: Currency formatting
-describe('formatCurrency', () => {
-  it('formats USD correctly', () => {
-    expect(formatCurrency(1234.56, 'USD')).toBe('$1,234.56');
+describe("formatCurrency", () => {
+  it("formats USD correctly", () => {
+    expect(formatCurrency(1234.56, "USD")).toBe("$1,234.56");
   });
 
-  it('formats EUR correctly', () => {
-    expect(formatCurrency(1234.56, 'EUR')).toBe('€1,234.56');
+  it("formats EUR correctly", () => {
+    expect(formatCurrency(1234.56, "EUR")).toBe("€1,234.56");
   });
 });
 ```
@@ -646,21 +658,21 @@ describe('formatCurrency', () => {
 
 ```typescript
 // Example: Currency API
-describe('POST /api/currency', () => {
-  it('converts USD to EUR', async () => {
+describe("POST /api/currency", () => {
+  it("converts USD to EUR", async () => {
     const response = await request(app)
-      .post('/api/currency')
-      .send({ amount: 100, from: 'USD', to: 'EUR' });
+      .post("/api/currency")
+      .send({ amount: 100, from: "USD", to: "EUR" });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('convertedAmount');
-    expect(response.body).toHaveProperty('exchangeRate');
+    expect(response.body).toHaveProperty("convertedAmount");
+    expect(response.body).toHaveProperty("exchangeRate");
   });
 
-  it('returns rate of 1 for same currency', async () => {
+  it("returns rate of 1 for same currency", async () => {
     const response = await request(app)
-      .post('/api/currency')
-      .send({ amount: 100, from: 'USD', to: 'USD' });
+      .post("/api/currency")
+      .send({ amount: 100, from: "USD", to: "USD" });
 
     expect(response.body.exchangeRate).toBe(1);
   });
@@ -669,13 +681,13 @@ describe('POST /api/currency', () => {
 
 ### 8.4 E2E Test Scenarios
 
-| Scenario | Steps |
-|----------|-------|
-| User Registration | Sign up → Verify email → Login → See dashboard |
-| Trip Creation | Login → New trip → Fill form → Submit → See trip |
-| Expense Entry | Open trip → Add expense → Currency converts → Saved |
-| Budget Tracking | Add expenses → See total → Check remaining |
-| Trip Deletion | Open trip → Delete → Confirm → Removed |
+| Scenario          | Steps                                               |
+| ----------------- | --------------------------------------------------- |
+| User Registration | Sign up → Verify email → Login → See dashboard      |
+| Trip Creation     | Login → New trip → Fill form → Submit → See trip    |
+| Expense Entry     | Open trip → Add expense → Currency converts → Saved |
+| Budget Tracking   | Add expenses → See total → Check remaining          |
+| Trip Deletion     | Open trip → Delete → Confirm → Removed              |
 
 ### 8.5 Test Commands
 
@@ -692,11 +704,11 @@ npm run test:e2e      # Playwright E2E tests
 
 ### 9.1 Environment Setup
 
-| Environment | URL | Branch |
-|-------------|-----|--------|
-| Development | localhost:3000 | feature/* |
-| Staging | staging.domain.com | develop |
-| Production | domain.com | main |
+| Environment | URL                | Branch     |
+| ----------- | ------------------ | ---------- |
+| Development | localhost:3000     | feature/\* |
+| Staging     | staging.domain.com | develop    |
+| Production  | domain.com         | main       |
 
 ### 9.2 CI/CD Pipeline (GitHub Actions)
 
@@ -717,8 +729,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
       - run: npm ci
       - run: npm run lint
 
@@ -729,8 +741,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
       - run: npm ci
       - run: npm run test:coverage
       - uses: codecov/codecov-action@v3
@@ -742,8 +754,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
       - run: npm ci
       - run: npm run build
         env:
@@ -761,7 +773,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+          vercel-args: "--prod"
 ```
 
 ### 9.3 Deployment Checklist
@@ -789,27 +801,28 @@ vercel rollback [deployment-url]
 
 ### 10.1 Planned Features
 
-| Feature | Priority | Complexity | Status |
-|---------|----------|------------|--------|
-| Runway Projections | High | Medium | Not Started |
-| Offline Sync Queue | High | High | Not Started |
-| Shared Trip Invitations | Medium | Medium | Schema Ready |
-| Zustand State Management | Medium | Low | Not Started |
-| Push Notifications | Low | Medium | Not Started |
-| Receipt Photo Uploads | Low | Medium | Not Started |
-| Export to CSV/PDF | Low | Low | Not Started |
+| Feature                  | Priority | Complexity | Status       |
+| ------------------------ | -------- | ---------- | ------------ |
+| Runway Projections       | High     | Medium     | Not Started  |
+| Offline Sync Queue       | High     | High       | Not Started  |
+| Shared Trip Invitations  | Medium   | Medium     | Schema Ready |
+| Zustand State Management | Medium   | Low        | Not Started  |
+| Push Notifications       | Low      | Medium     | Not Started  |
+| Receipt Photo Uploads    | Low      | Medium     | Not Started  |
+| Export to CSV/PDF        | Low      | Low        | Not Started  |
 
 ### 10.2 Runway Projections (High Priority)
 
 **Calculation Logic:**
+
 ```typescript
 interface RunwayCalculation {
-  remainingBudget: number;      // total_budget - sum(amount_base)
-  daysElapsed: number;          // today - start_date
-  dailyBurnRate: number;        // sum(amount_base) / daysElapsed
-  daysRemaining: number;        // remainingBudget / dailyBurnRate
-  projectedEndDate: Date;       // today + daysRemaining
-  isOnTrack: boolean;           // projectedEndDate >= end_date
+  remainingBudget: number; // total_budget - sum(amount_base)
+  daysElapsed: number; // today - start_date
+  dailyBurnRate: number; // sum(amount_base) / daysElapsed
+  daysRemaining: number; // remainingBudget / dailyBurnRate
+  projectedEndDate: Date; // today + daysRemaining
+  isOnTrack: boolean; // projectedEndDate >= end_date
 }
 ```
 
@@ -842,21 +855,21 @@ interface RunwayCalculation {
 
 ### 10.4 Performance Optimization
 
-| Optimization | Benefit |
-|--------------|---------|
-| React Server Components | Reduced client JS |
-| Edge caching for currency rates | Faster conversions |
-| Database connection pooling | Better concurrent performance |
-| Image optimization for receipts | Reduced storage/bandwidth |
+| Optimization                    | Benefit                       |
+| ------------------------------- | ----------------------------- |
+| React Server Components         | Reduced client JS             |
+| Edge caching for currency rates | Faster conversions            |
+| Database connection pooling     | Better concurrent performance |
+| Image optimization for receipts | Reduced storage/bandwidth     |
 
 ### 10.5 Scalability Considerations
 
-| Metric | Current Limit | Scaling Strategy |
-|--------|---------------|------------------|
-| Users | ~10K (Supabase free) | Upgrade Supabase plan |
-| Requests | 100K/month | Vercel Pro + Edge functions |
-| Database Size | 500MB | Supabase Pro (8GB+) |
-| Real-time Connections | 200 concurrent | Supabase Pro (500+) |
+| Metric                | Current Limit        | Scaling Strategy            |
+| --------------------- | -------------------- | --------------------------- |
+| Users                 | ~10K (Supabase free) | Upgrade Supabase plan       |
+| Requests              | 100K/month           | Vercel Pro + Edge functions |
+| Database Size         | 500MB                | Supabase Pro (8GB+)         |
+| Real-time Connections | 200 concurrent       | Supabase Pro (500+)         |
 
 ---
 
@@ -947,12 +960,12 @@ supabase gen types    # Generate TypeScript types
 
 ### Key URLs
 
-| Resource | URL |
-|----------|-----|
-| Supabase Dashboard | https://app.supabase.com |
-| Vercel Dashboard | https://vercel.com/dashboard |
+| Resource             | URL                              |
+| -------------------- | -------------------------------- |
+| Supabase Dashboard   | https://app.supabase.com         |
+| Vercel Dashboard     | https://vercel.com/dashboard     |
 | Frankfurter API Docs | https://www.frankfurter.app/docs |
 
 ---
 
-*This document should be updated as the application evolves.*
+_This document should be updated as the application evolves._
