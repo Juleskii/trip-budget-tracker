@@ -31,6 +31,7 @@ When planning multi-country trips, travelers struggle to answer: **"Am I on trac
 5. Open [http://localhost:3000](http://localhost:3000)
 
 ## Development
+
 ```bash
 npm run dev      # Start development server
 npm run build    # Build for production
@@ -38,6 +39,7 @@ npm run lint     # Run ESLint
 ```
 
 ## Project Structure
+
 ```
 app/              # Next.js App Router pages
 components/       # React components
