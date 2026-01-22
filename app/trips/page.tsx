@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { formatDate } from '@/lib/utils/format';
-import type { Trip } from '@/lib/types/database';
+import type { Trip, TripWithRole } from '@/lib/types/database';
 
 export default async function TripsPage() {
     const supabase = await createClient();
@@ -9,11 +9,38 @@ export default async function TripsPage() {
         data: { user },
     } = await supabase.auth.getUser();
 
-    const { data: trips, error } = await supabase
+    // Fetch trips created by the user (owned)
+    const { data: ownedTrips, error } = await supabase
         .from('trips')
         .select('*')
         .eq('created_by', user!.id)
         .order('created_at', { ascending: false });
+
+    // Fetch trips shared with the user (via trip_users)
+    const { data: sharedTripIds } = await supabase
+        .from('trip_users')
+        .select('trip_id')
+        .eq('user_id', user!.id)
+        .eq('role', 'member');
+
+    let sharedTrips: Trip[] = [];
+    if (sharedTripIds && sharedTripIds.length > 0) {
+        const ids = sharedTripIds.map((t) => t.trip_id);
+        const { data } = await supabase
+            .from('trips')
+            .select('*')
+            .in('id', ids)
+            .order('created_at', { ascending: false });
+        sharedTrips = (data || []) as Trip[];
+    }
+
+    // Combine and mark trips with their role
+    const allTrips: TripWithRole[] = [
+        ...((ownedTrips || []) as Trip[]).map((t) => ({ ...t, role: 'owner' as const })),
+        ...sharedTrips.map((t) => ({ ...t, role: 'member' as const })),
+    ].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    const trips = allTrips;
 
     return (
         <div className="space-y-6">
@@ -57,17 +84,23 @@ export default async function TripsPage() {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3       
   gap-6"
                 >
-                    {(trips as Trip[]).map((trip) => (
+                    {trips.map((trip) => (
                         <Link
                             key={trip.id}
                             href={`/trips/${trip.id}`}
-                            className="block bg-white rounded-lg shadow hover:shadow-md    
-  transition-shadow"
+                            className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow"
                         >
                             <div className="p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    {trip.name}
-                                </h3>
+                                <div className="flex items-start justify-between mb-2">
+                                    <h3 className="text-lg font-semibold text-gray-900">
+                                        {trip.name}
+                                    </h3>
+                                    {trip.role === 'member' && (
+                                        <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                                            Shared
+                                        </span>
+                                    )}
+                                </div>
                                 <div className="space-y-1 text-sm text-gray-600">
                                     <p>
                                         Budget: {trip.base_currency}
@@ -77,7 +110,7 @@ export default async function TripsPage() {
                                         {formatDate(trip.start_date)}
                                         {trip.end_date
                                             ? ` - ${formatDate(trip.end_date)}`
-                                            : ' (Open-ended '}
+                                            : ' (Open-ended)'}
                                     </p>
                                 </div>
                             </div>

@@ -33,6 +33,19 @@ export type ExpenseInsert = Omit<Expense, 'id' | 'created_at' | 'updated_at' | '
 
 export type ExpenseUpdate = Partial<Omit<ExpenseInsert, 'trip_id'>>
 
+export type TripUser = {
+  trip_id: string;
+  user_id: string;
+  role: 'owner' | 'member';
+  created_at?: string;
+};
+
+export type TripUserInsert = Omit<TripUser, 'created_at'>;
+
+export type TripWithRole = Trip & {
+  role: 'owner' | 'member';
+};
+
 export const EXPENSE_CATEGORIES = [
   'Food & Drinks',
   'Transport',

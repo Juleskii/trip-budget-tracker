@@ -4,7 +4,8 @@ import { createClient } from '@/lib/supabase/server';
 import { formatDate, formatCurrency } from '@/lib/utils/format';
 import { DeleteTripButton } from './components/delete-trip-button';
 import { ExpenseList } from './components/expense-list';
-import type { Trip, Expense } from '@/lib/types/database';
+import { TripMembers } from './components/trip-members';
+import type { Trip, Expense, TripUser } from '@/lib/types/database';
 
 type Props = {
     params: Promise<{ id: string }>;
@@ -23,6 +24,21 @@ export default async function TripDetailPage({ params }: Props) {
     if (tripError || !trip) {
         notFound();
     }
+
+    // Get current user
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    // Fetch trip members
+    const { data: tripUsers } = await supabase
+        .from('trip_users')
+        .select('user_id, role')
+        .eq('trip_id', id);
+
+    const members = (tripUsers || []) as TripUser[];
+    const isOwner = user?.id === trip.created_by;
+    const currentUserId = user?.id || '';
 
     const { data: expenses } = await supabase
         .from('expenses')
@@ -266,6 +282,13 @@ export default async function TripDetailPage({ params }: Props) {
                     </div>
                 </dl>
             </div>
+
+            <TripMembers
+                tripId={id}
+                members={members.map((m) => ({ user_id: m.user_id, role: m.role }))}
+                currentUserId={currentUserId}
+                isOwner={isOwner}
+            />
 
             <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center justify-between mb-4">
