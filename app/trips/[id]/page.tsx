@@ -293,12 +293,23 @@ export default async function TripDetailPage({ params }: Props) {
             <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-gray-900">Expenses</h2>
-                    <Link
-                        href={`/trips/${id}/expenses/new`}
-                        className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-                    >
-                        + Add Expense
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        {typedExpenses.length > 0 && (
+                            <a
+                                href={`/api/trips/${id}/export`}
+                                download
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                            >
+                                Export CSV
+                            </a>
+                        )}
+                        <Link
+                            href={`/trips/${id}/expenses/new`}
+                            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+                        >
+                            + Add Expense
+                        </Link>
+                    </div>
                 </div>
                 <ExpenseList expenses={typedExpenses} baseCurrency={typedTrip.base_currency} />
             </div>
