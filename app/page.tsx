@@ -38,21 +38,20 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex-1 flex flex-col">
           <div className="text-center max-w-4xl mx-auto">
             {/* Clear app purpose badge */}
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Trip Expense Tracker
+              Built for Budget Travelers
             </div>
 
             <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Travel more,
-              <span className="text-blue-600"> stress less</span>
-              <br />about your budget
+              Travel longer
+              <span className="text-blue-600"> on less</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Track expenses across currencies, split costs with travel companions,
-              and focus on making memories instead of counting receipts.
+              Know exactly how far your money will stretch. Track daily spending across currencies,
+              see how many days you have left, and make every dollar count.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* More prominent Start Your Journey button */}
@@ -79,63 +78,63 @@ export default function Home() {
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-4xl mx-auto w-full">
               <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
                 <div className="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4">
-                  <p className="text-gray-400 text-xs sm:text-sm mb-1">Total Budget</p>
-                  <p className="text-white text-xl sm:text-2xl font-bold">$3,500</p>
+                  <p className="text-gray-400 text-xs sm:text-sm mb-1">30-Day Budget</p>
+                  <p className="text-white text-xl sm:text-2xl font-bold">$1,500</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4">
-                  <p className="text-gray-400 text-xs sm:text-sm mb-1">Spent</p>
-                  <p className="text-white text-xl sm:text-2xl font-bold">$1,847</p>
+                  <p className="text-gray-400 text-xs sm:text-sm mb-1">Day 12 Spent</p>
+                  <p className="text-white text-xl sm:text-2xl font-bold">$487</p>
                 </div>
                 <div className="bg-green-500/20 backdrop-blur rounded-xl p-3 sm:p-4">
-                  <p className="text-green-300 text-xs sm:text-sm mb-1">Remaining</p>
-                  <p className="text-green-400 text-xl sm:text-2xl font-bold">$1,653</p>
+                  <p className="text-green-300 text-xs sm:text-sm mb-1">Days Left</p>
+                  <p className="text-green-400 text-xl sm:text-2xl font-bold">24 days</p>
                 </div>
               </div>
               <div className="space-y-3">
-                {/* Expense with inline conversion */}
+                {/* Budget-friendly expenses */}
                 <div className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
                       <span className="text-lg">🍜</span>
                     </div>
                     <div>
-                      <p className="text-white font-medium">Street Food Tour</p>
+                      <p className="text-white font-medium">Pad Thai from street cart</p>
                       <p className="text-gray-400 text-sm">Bangkok, Thailand</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">฿850</p>
-                    <p className="text-gray-500 text-xs">~$24.50</p>
+                    <p className="text-white font-semibold">฿60</p>
+                    <p className="text-gray-500 text-xs">~$1.75</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                      <span className="text-lg">🏨</span>
+                      <span className="text-lg">🛏️</span>
                     </div>
                     <div>
-                      <p className="text-white font-medium">Boutique Hotel</p>
-                      <p className="text-gray-400 text-sm">Kyoto, Japan</p>
+                      <p className="text-white font-medium">Hostel dorm (4-bed)</p>
+                      <p className="text-gray-400 text-sm">Chiang Mai, Thailand</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">¥18,500</p>
-                    <p className="text-gray-500 text-xs">~$123.80</p>
+                    <p className="text-white font-semibold">฿350</p>
+                    <p className="text-gray-500 text-xs">~$10.20</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                      <span className="text-lg">🚄</span>
+                      <span className="text-lg">🚌</span>
                     </div>
                     <div>
-                      <p className="text-white font-medium">JR Rail Pass</p>
-                      <p className="text-gray-400 text-sm">7-Day Unlimited</p>
+                      <p className="text-white font-medium">Overnight bus ticket</p>
+                      <p className="text-gray-400 text-sm">Bangkok → Chiang Mai</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">¥29,650</p>
-                    <p className="text-gray-500 text-xs">~$198.50</p>
+                    <p className="text-white font-semibold">฿550</p>
+                    <p className="text-gray-500 text-xs">~$16.00</p>
                   </div>
                 </div>
               </div>
@@ -145,12 +144,13 @@ export default function Home() {
             <div className="absolute -right-2 lg:-right-6 top-4 bg-white rounded-xl shadow-lg p-3 sm:p-4 hidden md:block animate-float-right">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">Under budget!</span>
+                <span className="text-sm font-medium text-gray-700">$40.58/day avg</span>
               </div>
+              <p className="text-xs text-gray-500 mt-1">Under $50 target!</p>
             </div>
-            <div className="absolute -right-2 lg:-right-6 top-24 bg-white rounded-xl shadow-lg p-3 sm:p-4 hidden md:block animate-float-right" style={{ animationDelay: '0.2s' }}>
-              <p className="text-xs text-gray-500 mb-1">Auto-converted</p>
-              <p className="text-sm font-bold text-gray-900">3 currencies → USD</p>
+            <div className="absolute -right-2 lg:-right-6 top-28 bg-white rounded-xl shadow-lg p-3 sm:p-4 hidden md:block animate-float-right" style={{ animationDelay: '0.2s' }}>
+              <p className="text-xs text-gray-500 mb-1">At this pace</p>
+              <p className="text-sm font-bold text-emerald-600">+6 bonus days</p>
             </div>
 
             {/* CTA after visual */}
@@ -182,10 +182,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Everything you need for worry-free travel
+              Stretch every dollar further
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From solo backpacking to group adventures, manage your travel finances with ease.
+              Built for backpackers, gap year travelers, and anyone who wants to travel longer on less.
             </p>
           </div>
 
@@ -225,10 +225,10 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Budget Insights</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Daily Burn Rate</h3>
               <p className="text-gray-600">
-                See at a glance how much you&apos;ve spent, what&apos;s remaining, and projections
-                for how long your budget will last.
+                Know your daily average spend instantly. See how many days you have left and
+                whether you&apos;re on track to make it last.
               </p>
             </div>
 
@@ -328,20 +328,22 @@ export default function Home() {
       {/* Inspiration Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-12 text-center text-white">
+          <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-3xl p-12 text-center text-white">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              &quot;The world is a book, and those who do not travel read only one page.&quot;
+              You don&apos;t need to be rich to see the world
             </h2>
-            <p className="text-blue-200 text-lg mb-8">— Saint Augustine</p>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
-              Your next adventure is waiting. Don&apos;t let budget anxiety hold you back—track
-              your spending with confidence and explore the world.
+            <p className="text-emerald-200 text-lg mb-8">
+              Backpackers have explored every corner of the globe on $30-50 a day.
+              The secret? Knowing exactly where your money goes.
+            </p>
+            <p className="text-xl text-emerald-100 max-w-2xl mx-auto mb-8">
+              Stop guessing if you can afford that extra week. Start knowing.
             </p>
             <Link
               href="/signup"
-              className="inline-block bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-50 transition-colors"
+              className="inline-block bg-white text-emerald-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-emerald-50 transition-colors"
             >
-              Start Planning Your Trip
+              Start Tracking for Free
             </Link>
           </div>
         </div>
@@ -352,7 +354,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Loved by travelers worldwide
+              Trusted by budget travelers
             </h2>
           </div>
 
@@ -366,14 +368,14 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                &quot;Finally, an expense tracker that understands travelers! The multi-currency
-                feature saved me so much headache during my 3-month Southeast Asia trip.&quot;
+                &quot;I stretched my $3,000 budget to 4 months in Southeast Asia. Seeing my daily
+                burn rate helped me know when to splurge and when to hold back.&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full"></div>
                 <div>
-                  <p className="font-semibold text-gray-900">Sarah K.</p>
-                  <p className="text-sm text-gray-500">Digital Nomad</p>
+                  <p className="font-semibold text-gray-900">Emma L.</p>
+                  <p className="text-sm text-gray-500">Gap Year Backpacker</p>
                 </div>
               </div>
             </div>
@@ -387,14 +389,14 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                &quot;We used TripBudget for our honeymoon across Europe. Being able to share
-                the trip made splitting costs so easy. Highly recommend!&quot;
+                &quot;Me and my mate shared a trip through South America. Split everything 50/50
+                and always knew exactly where we stood. No awkward money convos.&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full"></div>
                 <div>
-                  <p className="font-semibold text-gray-900">Mike & Lisa T.</p>
-                  <p className="text-sm text-gray-500">Newlyweds</p>
+                  <p className="font-semibold text-gray-900">Jake & Tom</p>
+                  <p className="text-sm text-gray-500">Hostel Friends</p>
                 </div>
               </div>
             </div>
@@ -408,14 +410,14 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                &quot;As someone who travels for work, the CSV export feature is a lifesaver
-                for expense reports. Simple, clean, and does exactly what I need.&quot;
+                &quot;Post-graduation trip on a student budget. The currency conversion meant I
+                never had to do math in my head—just log and go.&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full"></div>
                 <div>
-                  <p className="font-semibold text-gray-900">James R.</p>
-                  <p className="text-sm text-gray-500">Business Traveler</p>
+                  <p className="font-semibold text-gray-900">Priya S.</p>
+                  <p className="text-sm text-gray-500">Recent Graduate</p>
                 </div>
               </div>
             </div>
@@ -427,17 +429,17 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            Ready for your next adventure?
+            Make your money go further
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Join thousands of travelers who budget smarter, not harder.
-            Free to start, no credit card required.
+            Join travelers who turn tight budgets into longer adventures.
+            100% free. No catches.
           </p>
           <Link
             href="/signup"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-blue-200"
           >
-            Create Free Account
+            Start Tracking Free
           </Link>
         </div>
       </section>
