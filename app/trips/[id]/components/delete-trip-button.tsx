@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Spinner } from '@/components/ui/spinner';
+import { showToast } from '@/components/ui/toast';
 
 type Props = {
     tripId: string;
@@ -22,11 +23,12 @@ export function DeleteTripButton({ tripId, tripName }: Props) {
         const { error } = await supabase.from('trips').delete().eq('id', tripId);
 
         if (error) {
-            alert('Failed to delete trip: ' + error.message);
+            showToast('Failed to delete trip: ' + error.message, 'error');
             setLoading(false);
             return;
         }
 
+        showToast('Trip deleted successfully', 'success');
         router.push('/trips');
         router.refresh();
     };

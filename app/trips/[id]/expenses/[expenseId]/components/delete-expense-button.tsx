@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Spinner } from '@/components/ui/spinner'
+import { showToast } from '@/components/ui/toast'
 
 type Props = {
   tripId: string
@@ -25,11 +26,12 @@ export function DeleteExpenseButton({ tripId, expenseId }: Props) {
       .eq('id', expenseId)
 
     if (error) {
-      alert('Failed to delete expense: ' + error.message)
+      showToast('Failed to delete expense: ' + error.message, 'error')
       setLoading(false)
       return
     }
 
+    showToast('Expense deleted successfully', 'success')
     router.push(`/trips/${tripId}`)
     router.refresh()
   }

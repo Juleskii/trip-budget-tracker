@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Spinner } from '@/components/ui/spinner';
+import { showToast } from '@/components/ui/toast';
 
 type Member = {
   user_id: string;
@@ -71,6 +72,7 @@ export function TripMembers({ tripId, members, currentUserId, isOwner }: Props) 
 
       setSuccess(`${email} has been added to the trip!`);
       setEmail('');
+      showToast(`${email} has been added to the trip!`, 'success');
       router.refresh();
     } catch {
       setError('An error occurred. Please try again.');
@@ -90,10 +92,11 @@ export function TripMembers({ tripId, members, currentUserId, isOwner }: Props) 
       .eq('user_id', userId);
 
     if (error) {
-      alert('Failed to remove member.');
+      showToast('Failed to remove member', 'error');
       return;
     }
 
+    showToast('Member removed successfully', 'success');
     router.refresh();
   };
 

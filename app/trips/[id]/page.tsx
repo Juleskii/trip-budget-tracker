@@ -5,6 +5,7 @@ import { formatDate, formatCurrency } from '@/lib/utils/format';
 import { DeleteTripButton } from './components/delete-trip-button';
 import { ExpenseList } from './components/expense-list';
 import { TripMembers } from './components/trip-members';
+import { CategoryChart } from './components/category-chart';
 import type { Trip, Expense, TripUser } from '@/lib/types/database';
 
 type Props = {
@@ -324,6 +325,8 @@ export default async function TripDetailPage({ params }: Props) {
                 currentUserId={currentUserId}
                 isOwner={isOwner}
             />
+
+            <CategoryChart expenses={typedExpenses} baseCurrency={typedTrip.base_currency} />
 
             <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center justify-between mb-4">
