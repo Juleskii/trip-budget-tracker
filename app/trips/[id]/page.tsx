@@ -104,7 +104,7 @@ export default async function TripDetailPage({ params }: Props) {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <Link href="/trips" className="text-sm text-gray-600 hover:text-gray-900">
+                    <Link href="/trips" className="text-sm text-gray-600 hover:text-gray-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors">
                         ← Back to trips
                     </Link>
                     <h1 className="text-2xl font-bold text-gray-900 mt-2">{typedTrip.name}</h1>
@@ -112,7 +112,7 @@ export default async function TripDetailPage({ params }: Props) {
                 <div className="flex items-center space-x-3">
                     <Link
                         href={`/trips/${id}/edit`}
-                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                     >
                         Edit
                     </Link>
@@ -306,14 +306,14 @@ export default async function TripDetailPage({ params }: Props) {
                             <a
                                 href={`/api/trips/${id}/export`}
                                 download
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                             >
                                 Export CSV
                             </a>
                         )}
                         <Link
                             href={`/trips/${id}/expenses/new`}
-                            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+                            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                         >
                             + Add Expense
                         </Link>

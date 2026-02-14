@@ -147,14 +147,14 @@ export function EditTripForm({ trip }: Props) {
       <div className="flex justify-end space-x-3 pt-4">
         <Link
           href={`/trips/${trip.id}`}
-          className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+          className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
         >
           Cancel
         </Link>
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
         >
           {loading ? 'Saving...' : 'Save Changes'}
         </button>

@@ -1,12 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
 export function DashboardNav({ user }: { user: User }) {
     const router = useRouter();
+    const pathname = usePathname();
 
     const handleLogout = async () => {
         const supabase = createClient();
@@ -22,23 +23,28 @@ export function DashboardNav({ user }: { user: User }) {
                     <div className="flex items-center space-x-8">
                         <Link
                             href="/dashboard"
-                            className="text-xl font-bold             
-  text-gray-900"
+                            className="text-xl font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
                         >
                             Trip Budget
                         </Link>
-                        <div className="hidden sm:flex space-x-4">
+                        <div className="hidden sm:flex space-x-2">
                             <Link
                                 href="/dashboard"
-                                className="text-gray-600 hover:text-gray-900 px-3 py-2       
-  text-sm font-medium"
+                                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                                    pathname === '/dashboard'
+                                        ? 'bg-blue-50 text-blue-700'
+                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                }`}
                             >
                                 Dashboard
                             </Link>
                             <Link
                                 href="/trips"
-                                className="text-gray-600 hover:text-gray-900 px-3 py-2       
-  text-sm font-medium"
+                                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                                    pathname.startsWith('/trips')
+                                        ? 'bg-blue-50 text-blue-700'
+                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                }`}
                             >
                                 My Trips
                             </Link>
@@ -49,8 +55,7 @@ export function DashboardNav({ user }: { user: User }) {
                         <span className="text-sm text-gray-600 hidden sm:block">{user.email}</span>
                         <button
                             onClick={handleLogout}
-                            className="text-sm text-gray-600 hover:text-gray-900           
-  font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                            className="text-sm text-gray-600 hover:text-gray-900 font-medium px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             Sign out
                         </button>

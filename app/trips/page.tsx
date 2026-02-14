@@ -51,8 +51,7 @@ export default async function TripsPage() {
                 </div>
                 <Link
                     href="/trips/new"
-                    className="inline-flex items-center px-4 py-2 bg-blue-600          
-  text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                 >
                     + New Trip
                 </Link>
@@ -72,7 +71,7 @@ export default async function TripsPage() {
                     <p className="text-gray-600 mb-4">You haven&apos;t created any trips yet.</p>
                     <Link
                         href="/trips/new"
-                        className="text-blue-600 hover:text-blue-500 font-medium"
+                        className="text-blue-600 hover:text-blue-500 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded transition-colors"
                     >
                         Create your first trip
                     </Link>
@@ -88,7 +87,7 @@ export default async function TripsPage() {
                         <Link
                             key={trip.id}
                             href={`/trips/${trip.id}`}
-                            className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow"
+                            className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             <div className="p-6">
                                 <div className="flex items-start justify-between mb-2">

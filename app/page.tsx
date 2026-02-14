@@ -27,13 +27,13 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Link
               href="/login"
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 px-3 py-2"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
             >
               Log in
             </Link>
             <Link
               href="/signup"
-              className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
+              className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               Sign up
             </Link>
@@ -56,7 +56,7 @@ export default function Home() {
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/signup"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:shadow-xl hover:shadow-blue-600/40 active:scale-[0.98]"
+              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:shadow-xl hover:shadow-blue-600/40 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               Start tracking free
               <svg
@@ -75,7 +75,7 @@ export default function Home() {
             </Link>
             <Link
               href="/login"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-xl border border-gray-200 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-xl border border-gray-200 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               I have an account
             </Link>
@@ -96,7 +96,7 @@ export default function Home() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Feature 1 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-blue-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -122,7 +122,7 @@ export default function Home() {
             </div>
 
             {/* Feature 2 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-emerald-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -148,7 +148,7 @@ export default function Home() {
             </div>
 
             {/* Feature 3 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-50 to-violet-100/50 border border-violet-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-50 to-violet-100/50 border border-violet-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-violet-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -174,7 +174,7 @@ export default function Home() {
             </div>
 
             {/* Feature 4 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100/50 border border-amber-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100/50 border border-amber-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-amber-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -200,7 +200,7 @@ export default function Home() {
             </div>
 
             {/* Feature 5 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100/50 border border-rose-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100/50 border border-rose-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-rose-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -226,7 +226,7 @@ export default function Home() {
             </div>
 
             {/* Feature 6 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-cyan-100/50 border border-cyan-100">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-cyan-100/50 border border-cyan-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <div className="h-12 w-12 rounded-xl bg-cyan-600 flex items-center justify-center mb-4">
                 <svg
                   className="h-6 w-6 text-white"
@@ -315,7 +315,7 @@ export default function Home() {
           </p>
           <Link
             href="/signup"
-            className="mt-8 inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:shadow-xl hover:shadow-blue-600/40 active:scale-[0.98]"
+            className="mt-8 inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:shadow-xl hover:shadow-blue-600/40 active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Create free account
             <svg
