@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { Spinner } from '@/components/ui/spinner';
 
 type Props = {
     tripId: string;
@@ -37,14 +38,15 @@ export function DeleteTripButton({ tripId, tripName }: Props) {
                 <button
                     onClick={handleDelete}
                     disabled={loading}
-                    className="px-3 py-1.5 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors min-h-[44px] inline-flex items-center gap-2"
                 >
+                    {loading && <Spinner className="h-4 w-4" />}
                     {loading ? 'Deleting...' : 'Yes, delete'}
                 </button>
                 <button
                     onClick={() => setShowConfirm(false)}
                     disabled={loading}
-                    className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors min-h-[44px]"
                 >
                     Cancel
                 </button>

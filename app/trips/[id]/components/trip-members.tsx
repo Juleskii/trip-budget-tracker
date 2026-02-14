@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { Spinner } from '@/components/ui/spinner';
 
 type Member = {
   user_id: string;
@@ -110,7 +111,7 @@ export function TripMembers({ tripId, members, currentUserId, isOwner }: Props) 
             {isOwner && member.user_id !== currentUserId && (
               <button
                 onClick={() => handleRemove(member.user_id)}
-                className="text-sm text-red-600 hover:text-red-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded-lg px-2 py-1 transition-colors"
+                className="text-sm text-red-600 hover:text-red-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded-lg px-3 py-2 transition-colors min-h-[44px]"
               >
                 Remove
               </button>
@@ -147,8 +148,9 @@ export function TripMembers({ tripId, members, currentUserId, isOwner }: Props) 
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors inline-flex items-center gap-2"
             >
+              {loading && <Spinner className="h-4 w-4" />}
               {loading ? 'Inviting...' : 'Invite'}
             </button>
           </div>

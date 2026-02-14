@@ -67,12 +67,17 @@ export default async function TripsPage() {
             )}
 
             {trips && trips.length === 0 && (
-                <div className="text-center py-12 bg-white rounded-lg shadow">
-                    <p className="text-gray-600 mb-4">You haven&apos;t created any trips yet.</p>
+                <div className="text-center py-16 bg-white rounded-lg shadow">
+                    <div className="text-6xl mb-4">✈️</div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No trips yet</h3>
+                    <p className="text-gray-600 mb-6 max-w-sm mx-auto">
+                        Start tracking your travel budget by creating your first trip!
+                    </p>
                     <Link
                         href="/trips/new"
-                        className="text-blue-600 hover:text-blue-500 font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded transition-colors"
+                        className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 shadow-sm hover:shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
+                        <span className="mr-2">+</span>
                         Create your first trip
                     </Link>
                 </div>
@@ -87,29 +92,32 @@ export default async function TripsPage() {
                         <Link
                             key={trip.id}
                             href={`/trips/${trip.id}`}
-                            className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            className="group block bg-white rounded-lg shadow hover:shadow-lg active:shadow-md transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 overflow-hidden"
                         >
-                            <div className="p-6">
-                                <div className="flex items-start justify-between mb-2">
-                                    <h3 className="text-lg font-semibold text-gray-900">
+                            <div className="p-6 group-hover:bg-gray-50 transition-colors duration-200">
+                                <div className="flex items-start justify-between mb-3">
+                                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
                                         {trip.name}
                                     </h3>
                                     {trip.role === 'member' && (
-                                        <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                                        <span className="px-2.5 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full flex-shrink-0">
                                             Shared
                                         </span>
                                     )}
                                 </div>
-                                <div className="space-y-1 text-sm text-gray-600">
-                                    <p>
-                                        Budget: {trip.base_currency}
-                                        {Number(trip.total_budget).toLocaleString()}
+                                <div className="space-y-2 text-sm text-gray-600">
+                                    <p className="flex items-center gap-2">
+                                        <span className="text-gray-400">💰</span>
+                                        <span className="font-medium">{trip.base_currency} {Number(trip.total_budget).toLocaleString()}</span>
                                     </p>
-                                    <p>
-                                        {formatDate(trip.start_date)}
-                                        {trip.end_date
-                                            ? ` - ${formatDate(trip.end_date)}`
-                                            : ' (Open-ended)'}
+                                    <p className="flex items-center gap-2">
+                                        <span className="text-gray-400">📅</span>
+                                        <span>
+                                            {formatDate(trip.start_date)}
+                                            {trip.end_date
+                                                ? ` - ${formatDate(trip.end_date)}`
+                                                : ' (Open-ended)'}
+                                        </span>
                                     </p>
                                 </div>
                             </div>
