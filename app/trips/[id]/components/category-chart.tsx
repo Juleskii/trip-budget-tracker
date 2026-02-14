@@ -16,7 +16,7 @@ export function CategoryChart({ expenses, baseCurrency }: Props) {
 
   // Calculate spending by category
   const categoryTotals = expenses.reduce((acc, expense) => {
-    const category = expense.category
+    const category = expense.category as ExpenseCategory
     const amount = Number(expense.amount_base)
     acc[category] = (acc[category] || 0) + amount
     return acc

@@ -23,7 +23,7 @@ export function ExpenseList({ expenses, baseCurrency }: Props) {
   return (
     <div className="divide-y divide-gray-200">
       {expenses.map((expense) => {
-        const categoryStyle = getCategoryColor(expense.category)
+        const categoryStyle = getCategoryColor(expense.category as any)
 
         return (
           <Link

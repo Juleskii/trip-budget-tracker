@@ -25,7 +25,7 @@ export default async function ExpenseDetailPage({ params }: Props) {
 
   const typedTrip = trip as Trip
   const typedExpense = expense as Expense
-  const categoryStyle = getCategoryColor(typedExpense.category)
+  const categoryStyle = getCategoryColor(typedExpense.category as any)
 
   return (
     <div className="max-w-2xl mx-auto">
