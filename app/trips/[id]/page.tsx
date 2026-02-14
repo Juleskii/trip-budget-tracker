@@ -105,10 +105,10 @@ export default async function TripDetailPage({ params }: Props) {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <Link href="/trips" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors">
+                    <Link href="/trips" className="text-sm text-gray-600 hover:text-gray-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors">
                         ← Back to trips
                     </Link>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{typedTrip.name}</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 mt-2">{typedTrip.name}</h1>
                 </div>
                 <div className="flex items-center space-x-3">
                     <Link
@@ -122,29 +122,29 @@ export default async function TripDetailPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100 dark:border-gray-700">
+                <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100">
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="text-gray-400 dark:text-gray-500 text-xl">💰</span>
-                        <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Budget</h3>
+                        <span className="text-gray-400 text-xl">💰</span>
+                        <h3 className="text-sm font-medium text-gray-600">Total Budget</h3>
                     </div>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <p className="text-3xl font-bold text-gray-900">
                         {formatCurrency(Number(typedTrip.total_budget), typedTrip.base_currency)}
                     </p>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100 dark:border-gray-700">
+                <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100">
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="text-gray-400 dark:text-gray-500 text-xl">📊</span>
-                        <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Spent</h3>
+                        <span className="text-gray-400 text-xl">📊</span>
+                        <h3 className="text-sm font-medium text-gray-600">Spent</h3>
                     </div>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <p className="text-3xl font-bold text-gray-900">
                         {formatCurrency(totalSpent, typedTrip.base_currency)}
                     </p>
                     <div className="mt-3">
                         <div className="flex items-center justify-between text-sm mb-1">
-                            <span className="text-gray-600 dark:text-gray-400">{percentSpent}% of budget</span>
+                            <span className="text-gray-600">{percentSpent}% of budget</span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                             <div
                                 className={`h-full rounded-full transition-all duration-500 ${
                                     percentSpent >= 90
@@ -159,12 +159,12 @@ export default async function TripDetailPage({ params }: Props) {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100 dark:border-gray-700">
+                <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-gray-100">
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="text-gray-400 dark:text-gray-500 text-xl">
+                        <span className="text-gray-400 text-xl">
                             {remaining >= 0 ? '✅' : '⚠️'}
                         </span>
-                        <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Remaining</h3>
+                        <h3 className="text-sm font-medium text-gray-600">Remaining</h3>
                     </div>
                     <p
                         className={`text-3xl font-bold ${
@@ -296,8 +296,8 @@ export default async function TripDetailPage({ params }: Props) {
                 </div>
             )}
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-transparent dark:border-gray-700">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Trip Details</h2>
+            <div className="bg-white rounded-lg shadow p-6 border border-transparent">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Trip Details</h2>
                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <dt className="text-sm font-medium text-gray-600">Dates</dt>
@@ -328,9 +328,9 @@ export default async function TripDetailPage({ params }: Props) {
 
             <CategoryChart expenses={typedExpenses} baseCurrency={typedTrip.base_currency} />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-transparent dark:border-gray-700">
+            <div className="bg-white rounded-lg shadow p-6 border border-transparent">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Expenses</h2>
+                    <h2 className="text-lg font-semibold text-gray-900">Expenses</h2>
                     <div className="flex items-center gap-2">
                         {typedExpenses.length > 0 && (
                             <a

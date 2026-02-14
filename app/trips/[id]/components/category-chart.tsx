@@ -34,8 +34,8 @@ export function CategoryChart({ expenses, baseCurrency }: Props) {
   const totalSpent = categoryData.reduce((sum, d) => sum + d.amount, 0)
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 p-6">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Spending by Category</h2>
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Spending by Category</h2>
 
       <div className="space-y-4">
         {categoryData.map(({ category, amount }) => {
@@ -51,14 +51,14 @@ export function CategoryChart({ expenses, baseCurrency }: Props) {
                     <span className="mr-1">{categoryStyle.icon}</span>
                     {category}
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">{percentage}%</span>
+                  <span className="text-gray-500">{percentage}%</span>
                 </div>
-                <span className="font-semibold text-gray-900 dark:text-white">
+                <span className="font-semibold text-gray-900">
                   {formatCurrency(amount, baseCurrency)}
                 </span>
               </div>
 
-              <div className="relative h-8 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div className="relative h-8 bg-gray-100 rounded-full overflow-hidden">
                 <div
                   className={`absolute inset-y-0 left-0 ${categoryStyle.bg} opacity-60 transition-all duration-700 ease-out rounded-full`}
                   style={{ width: `${widthPercentage}%` }}
@@ -74,10 +74,10 @@ export function CategoryChart({ expenses, baseCurrency }: Props) {
         })}
       </div>
 
-      <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="mt-6 pt-4 border-t border-gray-200">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Spent</span>
-          <span className="text-lg font-bold text-gray-900 dark:text-white">
+          <span className="text-sm font-medium text-gray-600">Total Spent</span>
+          <span className="text-lg font-bold text-gray-900">
             {formatCurrency(totalSpent, baseCurrency)}
           </span>
         </div>
