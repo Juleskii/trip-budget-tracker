@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Navigation */}
       <nav className="px-4 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl flex items-center justify-between">
@@ -44,11 +44,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="px-4 pt-12 pb-16 sm:px-6 lg:px-8 sm:pt-20 sm:pb-24">
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
             Know exactly how long
-            <span className="block text-blue-600 dark:text-blue-400">your budget will last</span>
+            <span className="block text-blue-600">your budget will last</span>
           </h1>
-          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Track expenses in any currency, see your daily burn rate, and get
             runway projections for your trip. Built for backpackers, digital
             nomads, and anyone stretching their travel budget.
@@ -84,12 +84,12 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 transition-colors">
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
+          <h2 className="text-center text-2xl font-bold text-gray-900 sm:text-3xl">
             Everything you need to travel longer
           </h2>
-          <p className="mt-4 text-center text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+          <p className="mt-4 text-center text-gray-600 max-w-xl mx-auto">
             Stop guessing if you can afford that extra week. Know exactly where
             you stand.
           </p>

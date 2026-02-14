@@ -3,7 +3,6 @@
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { ThemeToggle } from '@/components/theme-toggle';
 import type { User } from '@supabase/supabase-js';
 
 export function DashboardNav({ user }: { user: User }) {
@@ -18,7 +17,7 @@ export function DashboardNav({ user }: { user: User }) {
     };
 
     return (
-        <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors">
+        <nav className="bg-white border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     <div className="flex items-center space-x-8">
@@ -52,12 +51,11 @@ export function DashboardNav({ user }: { user: User }) {
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-3">
-                        <ThemeToggle />
-                        <span className="text-sm text-gray-600 dark:text-gray-400 hidden sm:block">{user.email}</span>
+                    <div className="flex items-center space-x-4">
+                        <span className="text-sm text-gray-600 hidden sm:block">{user.email}</span>
                         <button
                             onClick={handleLogout}
-                            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 font-medium px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            className="text-sm text-gray-600 hover:text-gray-900 font-medium px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             Sign out
                         </button>

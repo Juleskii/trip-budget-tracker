@@ -46,8 +46,8 @@ export default async function TripsPage() {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">My Trips</h1>
-                    <p className="text-gray-600 mt-1">Manage your travel budgets</p>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">My Trips</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-1">Manage your travel budgets</p>
                 </div>
                 <Link
                     href="/trips/new"
@@ -67,10 +67,10 @@ export default async function TripsPage() {
             )}
 
             {trips && trips.length === 0 && (
-                <div className="text-center py-16 bg-white rounded-lg shadow">
+                <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-lg shadow">
                     <div className="text-6xl mb-4">✈️</div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No trips yet</h3>
-                    <p className="text-gray-600 mb-6 max-w-sm mx-auto">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No trips yet</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-sm mx-auto">
                         Start tracking your travel budget by creating your first trip!
                     </p>
                     <Link
@@ -92,11 +92,11 @@ export default async function TripsPage() {
                         <Link
                             key={trip.id}
                             href={`/trips/${trip.id}`}
-                            className="group block bg-white rounded-lg shadow hover:shadow-lg active:shadow-md transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 overflow-hidden"
+                            className="group block bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg active:shadow-md transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 overflow-hidden border border-transparent dark:border-gray-700"
                         >
-                            <div className="p-6 group-hover:bg-gray-50 transition-colors duration-200">
+                            <div className="p-6 group-hover:bg-gray-50 dark:group-hover:bg-gray-700 transition-colors duration-200">
                                 <div className="flex items-start justify-between mb-3">
-                                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
                                         {trip.name}
                                     </h3>
                                     {trip.role === 'member' && (
@@ -105,9 +105,9 @@ export default async function TripsPage() {
                                         </span>
                                     )}
                                 </div>
-                                <div className="space-y-2 text-sm text-gray-600">
+                                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                                     <p className="flex items-center gap-2">
-                                        <span className="text-gray-400">💰</span>
+                                        <span className="text-gray-400 dark:text-gray-500">💰</span>
                                         <span className="font-medium">{trip.base_currency} {Number(trip.total_budget).toLocaleString()}</span>
                                     </p>
                                     <p className="flex items-center gap-2">
