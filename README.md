@@ -54,4 +54,4 @@ MIT
 
 ---
 
-**Built as a portfolio project by Ken** | [LinkedIn](your-linkedin-url)
+**Built as a portfolio project by Ken** | [LinkedIn](https://www.linkedin.com/in/jules-k/)

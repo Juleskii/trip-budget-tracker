@@ -30,13 +30,21 @@ export default async function TripDetailPage({ params }: Props) {
         data: { user },
     } = await supabase.auth.getUser();
 
-    // Fetch trip members
+    // Fetch trip members with their profile emails
     const { data: tripUsers } = await supabase
         .from('trip_users')
-        .select('user_id, role')
+        .select('user_id, role, profiles(email)')
         .eq('trip_id', id);
 
-    const members = (tripUsers || []) as TripUser[];
+    const members = (tripUsers || []).map((tu) => {
+        const profile = tu.profiles as { email: string } | { email: string }[] | null;
+        const email = Array.isArray(profile) ? profile[0]?.email : profile?.email;
+        return {
+            user_id: tu.user_id,
+            role: tu.role as 'owner' | 'member',
+            email,
+        };
+    });
     const isOwner = user?.id === trip.created_by;
     const currentUserId = user?.id || '';
 
@@ -285,7 +293,7 @@ export default async function TripDetailPage({ params }: Props) {
 
             <TripMembers
                 tripId={id}
-                members={members.map((m) => ({ user_id: m.user_id, role: m.role }))}
+                members={members}
                 currentUserId={currentUserId}
                 isOwner={isOwner}
             />
